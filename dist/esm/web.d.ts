@@ -8,7 +8,9 @@ export declare class PusherBeamsWeb extends WebPlugin implements PusherBeamsPlug
     }): Promise<{
         success: boolean;
     }>;
-    getDeviceId(): Promise<{
+    getDeviceId(options: {
+        instanceId: string;
+    }): Promise<{
         deviceId: string;
     }>;
     addDeviceInterest(options: {

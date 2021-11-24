@@ -23,8 +23,14 @@
       },
       {
         "name": "getDeviceId",
-        "signature": "() => any",
-        "parameters": [],
+        "signature": "(options: { instanceId: string; }) => any",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ instanceId: string; }"
+          }
+        ],
         "returns": "any",
         "tags": [],
         "docs": "",

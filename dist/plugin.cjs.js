@@ -20,8 +20,8 @@ class PusherBeamsWeb extends core.WebPlugin {
         console.log(this.nativeOnly, options);
         return { success: true };
     }
-    async getDeviceId() {
-        console.log(this.nativeOnly);
+    async getDeviceId(options) {
+        console.log(this.nativeOnly, options);
         return { deviceId: 'deviceId' };
     }
     async addDeviceInterest(options) {

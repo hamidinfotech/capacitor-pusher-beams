@@ -8,7 +8,9 @@ export interface PusherBeamsPlugin {
     }): Promise<{
         success: boolean;
     }>;
-    getDeviceId(): Promise<{
+    getDeviceId(options: {
+        instanceId: string;
+    }): Promise<{
         deviceId: string;
     }>;
     addDeviceInterest(options: {

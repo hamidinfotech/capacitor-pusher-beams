@@ -16,8 +16,8 @@ export class PusherBeamsWeb extends WebPlugin implements PusherBeamsPlugin {
     return { success: true };
   }
 
-  async getDeviceId(): Promise<{deviceId: string}> {
-    console.log(this.nativeOnly);
+  async getDeviceId(options: { instanceId: string; }): Promise<{deviceId: string}> {
+    console.log(this.nativeOnly, options);
     return {deviceId: 'deviceId'};
   }
 
