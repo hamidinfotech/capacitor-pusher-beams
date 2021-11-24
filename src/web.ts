@@ -1,4 +1,5 @@
 import { WebPlugin } from '@capacitor/core';
+
 import type { PusherBeamsPlugin, TokenProviderHeader } from './definitions';
 
 export class PusherBeamsWeb extends WebPlugin implements PusherBeamsPlugin {
@@ -8,6 +9,11 @@ export class PusherBeamsWeb extends WebPlugin implements PusherBeamsPlugin {
       name: 'PusherBeams',
       platforms: ['web'],
     });
+  }
+
+  async getDeviceId(): Promise<{deviceId: string}> {
+    console.log(this.nativeOnly);
+    return {deviceId: 'deviceId'};
   }
 
   async addDeviceInterest(options: { interest: string; }): Promise<{ message: string; }> {

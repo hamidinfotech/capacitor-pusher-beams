@@ -7,6 +7,10 @@ export class PusherBeamsWeb extends WebPlugin {
         });
         this.nativeOnly = "Method not implemented for web browser.";
     }
+    async getDeviceId() {
+        console.log(this.nativeOnly);
+        return { deviceId: 'deviceId' };
+    }
     async addDeviceInterest(options) {
         console.log(options);
         throw new Error(this.nativeOnly);

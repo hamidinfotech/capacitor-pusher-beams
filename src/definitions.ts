@@ -4,6 +4,7 @@ export interface TokenProviderHeader {
 }
 
 export interface PusherBeamsPlugin {
+  getDeviceId(): Promise<{ deviceId: string }>;
   addDeviceInterest(options: { interest: string }): Promise<{ message: string }>;
   removeDeviceInterest(options: { interest: string }): Promise<{ success: boolean }>;
   setDeviceInterests(options: { interests: string[] }): Promise<{ interests: string[] }>;

@@ -1,6 +1,8 @@
 package com.practera.capacitor.pusherbeams;
 
 public class PusherBeams {
+    public String getDeviceId(String value) { return value; }
+
     public String addDeviceInterest(String value) {
         return value;
     }

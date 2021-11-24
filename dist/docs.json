@@ -6,6 +6,16 @@
     "tags": [],
     "methods": [
       {
+        "name": "getDeviceId",
+        "signature": "() => any",
+        "parameters": [],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "getdeviceid"
+      },
+      {
         "name": "addDeviceInterest",
         "signature": "(options: { interest: string; }) => any",
         "parameters": [

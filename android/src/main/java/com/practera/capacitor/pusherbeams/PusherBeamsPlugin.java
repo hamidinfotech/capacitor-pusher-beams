@@ -20,6 +20,7 @@ import com.pusher.pushnotifications.PusherCallbackError;
 import com.pusher.pushnotifications.auth.AuthData;
 import com.pusher.pushnotifications.auth.AuthDataGetter;
 import com.pusher.pushnotifications.auth.BeamsTokenProvider;
+import com.pusher.pushnotifications.internal.InstanceDeviceStateStore;
 
 import org.json.JSONException;
 
@@ -32,6 +33,14 @@ public class PusherBeamsPlugin extends Plugin {
     private PusherBeams implementation = new PusherBeams();
 
     String packageName;
+
+    @PluginMethod
+    public void getDeviceId(PluginCall call) {
+        InstanceDeviceStateStore instanceDeviceStateStore = new InstanceDeviceStateStore(applicationContext);
+        JSObject ret = new JSObject();
+        ret.put("deviceId", instanceDeviceStateStore.getDeviceId());
+        call.success(ret);
+    }
 
     @PluginMethod
     public void addDeviceInterest(PluginCall call) {
