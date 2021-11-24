@@ -11,8 +11,8 @@ export class PusherBeamsWeb extends WebPlugin implements PusherBeamsPlugin {
     });
   }
 
-  async start(): Promise<{success: boolean}> {
-    console.log(this.nativeOnly);
+  async start(options: { instanceId: string; }): Promise<{success: boolean}> {
+    console.log(this.nativeOnly, options);
     return { success: true };
   }
 
