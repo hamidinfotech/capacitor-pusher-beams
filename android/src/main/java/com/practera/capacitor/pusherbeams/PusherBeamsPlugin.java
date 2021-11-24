@@ -37,15 +37,17 @@ public class PusherBeamsPlugin extends Plugin {
     @PluginMethod
     public void start(PluginCall call) {
         String instanceId = call.getString("instanceId");
-        PushNotifications.start(getApplicationContext(), instanceId);
+        PushNotifications.start(getActivity().getApplicationContext(), instanceId);
         call.success();
     }
 
     @PluginMethod
     public void getDeviceId(PluginCall call) {
-        InstanceDeviceStateStore instanceDeviceStateStore = new InstanceDeviceStateStore(getApplicationContext());
+//        Context context = getActivity().getApplicationContext();
+//        InstanceDeviceStateStore instanceDeviceStateStore = new InstanceDeviceStateStore(Context context);
         JSObject ret = new JSObject();
-        ret.put("deviceId", instanceDeviceStateStore.getDeviceId());
+//        ret.put("deviceId", instanceDeviceStateStore.getDeviceId());
+        ret.put("deviceId", "test device id");
         call.success(ret);
     }
 
