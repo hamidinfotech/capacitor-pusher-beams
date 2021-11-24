@@ -3,6 +3,9 @@ import type { PusherBeamsPlugin, TokenProviderHeader } from './definitions';
 export declare class PusherBeamsWeb extends WebPlugin implements PusherBeamsPlugin {
     private nativeOnly;
     constructor();
+    start(): Promise<{
+        success: boolean;
+    }>;
     getDeviceId(): Promise<{
         deviceId: string;
     }>;

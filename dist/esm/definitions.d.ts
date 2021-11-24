@@ -3,6 +3,9 @@ export interface TokenProviderHeader {
     appkey: string;
 }
 export interface PusherBeamsPlugin {
+    start(): Promise<{
+        success: boolean;
+    }>;
     getDeviceId(): Promise<{
         deviceId: string;
     }>;

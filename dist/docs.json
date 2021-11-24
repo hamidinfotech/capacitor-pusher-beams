@@ -6,6 +6,16 @@
     "tags": [],
     "methods": [
       {
+        "name": "start",
+        "signature": "() => any",
+        "parameters": [],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "start"
+      },
+      {
         "name": "getDeviceId",
         "signature": "() => any",
         "parameters": [],
