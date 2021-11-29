@@ -1,12 +1,16 @@
 package com.practera.capacitor.pusherbeams;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.pusher.pushnotifications.fcm.MessagingService;
 
-public abstract class NotificationMessagingService extends MessagingService {
+public class NotificationMessagingService extends MessagingService {
 
     @Override
-    public abstract void onMessageReceived(@NonNull RemoteMessage remoteMessage);
+    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        Log.d("test", "capacitor plugin test");
+    }
 }
