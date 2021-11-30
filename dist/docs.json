@@ -145,12 +145,12 @@
       },
       {
         "name": "addListener",
-        "signature": "(eventName: 'pushNotificationActionPerformed', listenerFunc: (notification: ActionPerformed) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "signature": "(eventName: 'pusherNotificationActionPerformed', listenerFunc: (notification: ActionPerformed) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
         "parameters": [
           {
             "name": "eventName",
             "docs": "",
-            "type": "\"pushNotificationActionPerformed\""
+            "type": "\"pusherNotificationActionPerformed\""
           },
           {
             "name": "listenerFunc",

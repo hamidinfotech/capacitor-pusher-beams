@@ -17,7 +17,7 @@ export interface PusherBeamsPlugin {
   clearAllState(): Promise<{ success: boolean }>;
   stop(): Promise<{ success: boolean }>;
   addListener(
-      eventName: 'pushNotificationActionPerformed',
+      eventName: 'pusherNotificationActionPerformed',
       listenerFunc: (notification: ActionPerformed) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 }
