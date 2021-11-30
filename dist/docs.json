@@ -142,6 +142,30 @@
         "docs": "",
         "complexTypes": [],
         "slug": "stop"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'pushNotificationActionPerformed', listenerFunc: (notification: ActionPerformed) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "\"pushNotificationActionPerformed\""
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(notification: ActionPerformed) => void"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ActionPerformed",
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistener"
       }
     ],
     "properties": []
@@ -167,6 +191,214 @@
           "docs": "",
           "complexTypes": [],
           "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "ActionPerformed",
+      "slug": "actionperformed",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "actionId",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The action performed on the notification.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "inputValue",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Text entered on the notification action.\n\nOnly available on iOS.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "notification",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The notification in which the action was performed.",
+          "complexTypes": [
+            "PushNotificationSchema"
+          ],
+          "type": "PushNotificationSchema"
+        }
+      ]
+    },
+    {
+      "name": "PushNotificationSchema",
+      "slug": "pushnotificationschema",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "title",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The notification title.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "subtitle",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The notification subtitle.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "body",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The main text payload for the notification.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "id",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The notification identifier.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "badge",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The number to display for the app icon badge.",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "notification",
+          "tags": [
+            {
+              "text": "will be removed in next major version.",
+              "name": "deprecated"
+            },
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "It's not being returned.",
+          "complexTypes": [],
+          "type": "any"
+        },
+        {
+          "name": "data",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Any additional data that was included in the\npush notification payload.",
+          "complexTypes": [],
+          "type": "any"
+        },
+        {
+          "name": "click_action",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The action to be performed on the user opening the notification.\n\nOnly available on Android.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "link",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Deep link from the notification.\n\nOnly available on Android.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "group",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Set the group identifier for notification grouping.\n\nOnly available on Android. Works like `threadIdentifier` on iOS.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "groupSummary",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Designate this notification as the summary for an associated `group`.\n\nOnly available on Android.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => any"
         }
       ]
     }

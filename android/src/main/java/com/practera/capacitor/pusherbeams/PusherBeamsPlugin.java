@@ -3,6 +3,7 @@ package com.practera.capacitor.pusherbeams;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -188,5 +189,29 @@ public class PusherBeamsPlugin extends Plugin {
         }
 
         return "com.practera.appv2";
+    }
+
+    @Override
+    protected void handleOnNewIntent(Intent data) {
+        super.handleOnNewIntent(data);
+        Bundle bundle = data.getExtras();
+        if (bundle != null && bundle.containsKey("google.message_id")) {
+            JSObject notificationJson = new JSObject();
+            JSObject dataObject = new JSObject();
+            for (String key : bundle.keySet()) {
+                if (key.equals("google.message_id")) {
+                    notificationJson.put("id", bundle.get(key));
+                } else {
+                    Object value = bundle.get(key);
+                    String valueStr = (value != null) ? value.toString() : null;
+                    dataObject.put(key, valueStr);
+                }
+            }
+            notificationJson.put("data", dataObject);
+            JSObject actionJson = new JSObject();
+            actionJson.put("actionId", "tap");
+            actionJson.put("notification", notificationJson);
+            notifyListeners("pushNotificationActionPerformed", actionJson, true);
+        }
     }
 }
