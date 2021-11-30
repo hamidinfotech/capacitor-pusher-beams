@@ -211,7 +211,7 @@ public class PusherBeamsPlugin extends Plugin {
             JSObject actionJson = new JSObject();
             actionJson.put("actionId", "tap");
             actionJson.put("notification", notificationJson);
-            notifyListeners("pushNotificationActionPerformed", actionJson, true);
+            notifyListeners("pusherNotificationActionPerformed", actionJson, true);
         }
     }
 }
