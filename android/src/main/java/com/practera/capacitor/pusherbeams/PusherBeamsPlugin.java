@@ -200,17 +200,14 @@ public class PusherBeamsPlugin extends Plugin {
             Log.d("debug", bundle.toString());
         else
             Log.d("debug", "bundle is null");
-        if (bundle != null && bundle.containsKey("google.message_id")) {
+        if (bundle != null && bundle.containsKey("pusher_notification")) {
+            Log.d("debug", "pusher notification");
             JSObject notificationJson = new JSObject();
             JSObject dataObject = new JSObject();
             for (String key : bundle.keySet()) {
-                if (key.equals("google.message_id")) {
-                    notificationJson.put("id", bundle.get(key));
-                } else {
-                    Object value = bundle.get(key);
-                    String valueStr = (value != null) ? value.toString() : null;
-                    dataObject.put(key, valueStr);
-                }
+                Object value = bundle.get(key);
+                String valueStr = (value != null) ? value.toString() : null;
+                dataObject.put(key, valueStr);
             }
             notificationJson.put("data", dataObject);
             JSObject actionJson = new JSObject();
