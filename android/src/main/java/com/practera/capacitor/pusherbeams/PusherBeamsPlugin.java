@@ -196,7 +196,10 @@ public class PusherBeamsPlugin extends Plugin {
         super.handleOnNewIntent(data);
         Bundle bundle = data.getExtras();
         Log.d("debug", "handleOnNewIntent!");
-        Log.d("debug", bundle.toString());
+        if (bundle != null)
+            Log.d("debug", bundle.toString());
+        else
+            Log.d("debug", "bundle is null");
         if (bundle != null && bundle.containsKey("google.message_id")) {
             JSObject notificationJson = new JSObject();
             JSObject dataObject = new JSObject();
