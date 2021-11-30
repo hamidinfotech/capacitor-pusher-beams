@@ -195,13 +195,7 @@ public class PusherBeamsPlugin extends Plugin {
     protected void handleOnNewIntent(Intent data) {
         super.handleOnNewIntent(data);
         Bundle bundle = data.getExtras();
-        Log.d("debug", "handleOnNewIntent!");
-        if (bundle != null)
-            Log.d("debug", bundle.toString());
-        else
-            Log.d("debug", "bundle is null");
         if (bundle != null && bundle.containsKey("pusher_notification")) {
-            Log.d("debug", "pusher notification");
             JSObject notificationJson = new JSObject();
             JSObject dataObject = new JSObject();
             for (String key : bundle.keySet()) {
