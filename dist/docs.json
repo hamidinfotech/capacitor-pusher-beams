@@ -169,7 +169,7 @@
       },
       {
         "name": "addListener",
-        "signature": "(eventName: 'pusherDeviceId', listenerFunc: (data: ActionPerformed) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "signature": "(eventName: 'pusherDeviceId', listenerFunc: (data: PusherDeviceId) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
         "parameters": [
           {
             "name": "eventName",
@@ -179,14 +179,14 @@
           {
             "name": "listenerFunc",
             "docs": "",
-            "type": "(data: ActionPerformed) => void"
+            "type": "(data: PusherDeviceId) => void"
           }
         ],
         "returns": "any",
         "tags": [],
         "docs": "",
         "complexTypes": [
-          "ActionPerformed",
+          "PusherDeviceId",
           "PluginListenerHandle"
         ],
         "slug": "addlistener"
@@ -423,6 +423,27 @@
           "docs": "",
           "complexTypes": [],
           "type": "() => any"
+        }
+      ]
+    },
+    {
+      "name": "PusherDeviceId",
+      "slug": "pusherdeviceid",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "deviceId",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Pusher Device ID",
+          "complexTypes": [],
+          "type": "string"
         }
       ]
     }

@@ -26,7 +26,7 @@ public class PusherBeams: CAPPlugin {
         }
         
         print("emit device id -> " + deviceId)
-        self.notifyListeners("pusherDeviceId", data: ["deviceId": deviceId], retainUntilConsumed: true)
+        notifyListeners("pusherDeviceId", data: ["deviceId": deviceId], retainUntilConsumed: true)
         print("finishe emit!!!!")
     }
     
