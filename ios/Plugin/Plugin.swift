@@ -19,8 +19,15 @@ public class PusherBeams: CAPPlugin {
     
     @objc public func emitDeviceId(instanceId: String) {
         let deviceId = self.deviceId(instanceId: instanceId)
+                
+        guard let deviceId = deviceId else {
+            print("can not emit due to null device id")
+            return
+        }
         
-        self.notifyListeners("pusherDeviceId", data: ["deviceId":deviceId])
+        print("emit device id -> " + deviceId)
+        self.notifyListeners("pusherDeviceId", data: ["deviceId": deviceId], retainUntilConsumed: true)
+        print("finishe emit!!!!")
     }
     
     @objc func start(_ call: CAPPluginCall) {
