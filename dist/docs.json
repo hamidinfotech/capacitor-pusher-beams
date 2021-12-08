@@ -166,6 +166,30 @@
           "PluginListenerHandle"
         ],
         "slug": "addlistener"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'pusherDeviceId', listenerFunc: (data: ActionPerformed) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "\"pusherDeviceId\""
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(data: ActionPerformed) => void"
+          }
+        ],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ActionPerformed",
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistener"
       }
     ],
     "properties": []

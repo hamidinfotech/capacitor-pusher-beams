@@ -4,7 +4,8 @@
 // Define the plugin using the CAP_PLUGIN Macro, and
 // each method the plugin supports using the CAP_PLUGIN_METHOD macro.
 CAP_PLUGIN(PusherBeams, "PusherBeams",
-           CAP_PLUGIN_METHOD(start, CAPPluginReturnPromise);        
+           CAP_PLUGIN_METHOD(start, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getDeviceId, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(addDeviceInterest, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(removeDeviceInterest, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getDeviceInterests, CAPPluginReturnPromise);
