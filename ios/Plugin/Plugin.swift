@@ -17,19 +17,6 @@ public class PusherBeams: CAPPlugin {
         return userDefaults?.string(forKey: "com.pusher.sdk.deviceId")
     }
     
-    @objc public func emitDeviceId(instanceId: String) {
-        let deviceId = self.deviceId(instanceId: instanceId)
-                
-        guard let deviceId = deviceId else {
-            print("can not emit due to null device id")
-            return
-        }
-        
-        print("emit device id -> " + deviceId)
-        notifyListeners("pusherDeviceId", data: ["deviceId": deviceId], retainUntilConsumed: true)
-        print("finishe emit!!!!")
-    }
-    
     @objc func start(_ call: CAPPluginCall) {
         call.success()
     }
@@ -39,13 +26,26 @@ public class PusherBeams: CAPPlugin {
         let deviceId = self.deviceId(instanceId: instanceId)
         
         guard let deviceId = deviceId else {
-            call.reject("There is no device ID!")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                let deviceId = self.deviceId(instanceId: instanceId)
+                
+                guard let deviceId = deviceId else {
+                    call.reject("There is no device ID!")
+                    return
+                }
+                
+                call.success([
+                    "deviceId": deviceId
+                ])
+            }
+            
             return
         }
         
         call.success([
             "deviceId": deviceId
         ])
+        
     }
     
     @objc func addDeviceInterest(_ call: CAPPluginCall) {

@@ -166,30 +166,6 @@
           "PluginListenerHandle"
         ],
         "slug": "addlistener"
-      },
-      {
-        "name": "addListener",
-        "signature": "(eventName: 'pusherDeviceId', listenerFunc: (data: PusherDeviceId) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
-        "parameters": [
-          {
-            "name": "eventName",
-            "docs": "",
-            "type": "\"pusherDeviceId\""
-          },
-          {
-            "name": "listenerFunc",
-            "docs": "",
-            "type": "(data: PusherDeviceId) => void"
-          }
-        ],
-        "returns": "any",
-        "tags": [],
-        "docs": "",
-        "complexTypes": [
-          "PusherDeviceId",
-          "PluginListenerHandle"
-        ],
-        "slug": "addlistener"
       }
     ],
     "properties": []
@@ -423,27 +399,6 @@
           "docs": "",
           "complexTypes": [],
           "type": "() => any"
-        }
-      ]
-    },
-    {
-      "name": "PusherDeviceId",
-      "slug": "pusherdeviceid",
-      "docs": "",
-      "tags": [],
-      "methods": [],
-      "properties": [
-        {
-          "name": "deviceId",
-          "tags": [
-            {
-              "text": "1.0.0",
-              "name": "since"
-            }
-          ],
-          "docs": "Pusher Device ID",
-          "complexTypes": [],
-          "type": "string"
         }
       ]
     }
