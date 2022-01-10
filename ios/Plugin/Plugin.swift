@@ -24,19 +24,16 @@ public class PusherBeams: CAPPlugin {
     @objc func getDeviceId(_ call: CAPPluginCall) {
         let instanceId = call.getString("instanceId") ?? ""
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            let deviceId = self.deviceId(instanceId: instanceId)
+        let deviceId = self.deviceId(instanceId: instanceId)
             
-            guard let deviceId = deviceId else {
-                call.reject("There is no device ID!")
-                return
-            }
-            
-            call.success([
-                "deviceId": deviceId
-            ])
+        guard let deviceId = deviceId else {
+            call.reject("There is no device ID!")
+            return
         }
         
+        call.success([
+            "deviceId": deviceId
+        ])
     }
     
     @objc func addDeviceInterest(_ call: CAPPluginCall) {
