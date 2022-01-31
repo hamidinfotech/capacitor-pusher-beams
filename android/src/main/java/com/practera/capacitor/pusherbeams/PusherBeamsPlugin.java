@@ -39,7 +39,7 @@ public class PusherBeamsPlugin extends Plugin {
     public void start(PluginCall call) {
         String instanceId = call.getString("instanceId");
         PushNotifications.start(getActivity().getApplicationContext(), instanceId);
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod
@@ -48,7 +48,7 @@ public class PusherBeamsPlugin extends Plugin {
         InstanceDeviceStateStore instanceDeviceStateStore = new InstanceDeviceStateStore(getActivity().getApplicationContext(), instanceId);
         JSObject ret = new JSObject();
         ret.put("deviceId", instanceDeviceStateStore.getDeviceId());
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
@@ -57,14 +57,14 @@ public class PusherBeamsPlugin extends Plugin {
         PushNotifications.addDeviceInterest(interest);
         JSObject ret = new JSObject();
         ret.put("message", "Interest Added");
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
     public void removeDeviceInterest(PluginCall call) {
         String interest = call.getString("interest");
         PushNotifications.removeDeviceInterest(interest);
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod
@@ -72,7 +72,7 @@ public class PusherBeamsPlugin extends Plugin {
         Set<String> interests = PushNotifications.getDeviceInterests();
         JSObject ret = new JSObject();
         ret.put("interests", interests);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
@@ -92,13 +92,13 @@ public class PusherBeamsPlugin extends Plugin {
         Set<String> registered = PushNotifications.getDeviceInterests();
         ret.put("interests", registered);
         ret.put("success", true);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
     public void clearDeviceInterests(PluginCall call) {
         PushNotifications.clearDeviceInterests();
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod
@@ -132,7 +132,7 @@ public class PusherBeamsPlugin extends Plugin {
                 ret.put("message", "Successfully authenticated with Pusher Beams");
                 ret.put("success", true);
                 ret.put("raw", values);
-                call.success(ret);
+                call.resolve(ret);
             }
 
             @Override
@@ -166,7 +166,7 @@ public class PusherBeamsPlugin extends Plugin {
         PushNotifications.clearAllState();
         JSObject ret = new JSObject();
         ret.put("success", false);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
@@ -174,13 +174,13 @@ public class PusherBeamsPlugin extends Plugin {
         PushNotifications.stop();
         JSObject ret = new JSObject();
         ret.put("success", false);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
     private void setPackageName(PluginCall call) {
         this.packageName = call.getString("packageName");
-        call.success();
+        call.resolve();
     }
 
     private String getPackageName() {
