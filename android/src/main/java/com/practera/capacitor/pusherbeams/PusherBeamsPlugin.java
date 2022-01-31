@@ -3,6 +3,7 @@ package com.practera.capacitor.pusherbeams;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ import com.pusher.pushnotifications.PusherCallbackError;
 import com.pusher.pushnotifications.auth.AuthData;
 import com.pusher.pushnotifications.auth.AuthDataGetter;
 import com.pusher.pushnotifications.auth.BeamsTokenProvider;
+import com.pusher.pushnotifications.internal.InstanceDeviceStateStore;
 
 import org.json.JSONException;
 
@@ -34,19 +36,35 @@ public class PusherBeamsPlugin extends Plugin {
     String packageName;
 
     @PluginMethod
+    public void start(PluginCall call) {
+        String instanceId = call.getString("instanceId");
+        PushNotifications.start(getActivity().getApplicationContext(), instanceId);
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void getDeviceId(PluginCall call) {
+        String instanceId = call.getString("instanceId");
+        InstanceDeviceStateStore instanceDeviceStateStore = new InstanceDeviceStateStore(getActivity().getApplicationContext(), instanceId);
+        JSObject ret = new JSObject();
+        ret.put("deviceId", instanceDeviceStateStore.getDeviceId());
+        call.resolve(ret);
+    }
+
+    @PluginMethod
     public void addDeviceInterest(PluginCall call) {
         String interest = call.getString("interest");
         PushNotifications.addDeviceInterest(interest);
         JSObject ret = new JSObject();
         ret.put("message", "Interest Added");
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
     public void removeDeviceInterest(PluginCall call) {
         String interest = call.getString("interest");
         PushNotifications.removeDeviceInterest(interest);
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod
@@ -54,7 +72,7 @@ public class PusherBeamsPlugin extends Plugin {
         Set<String> interests = PushNotifications.getDeviceInterests();
         JSObject ret = new JSObject();
         ret.put("interests", interests);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
@@ -74,13 +92,13 @@ public class PusherBeamsPlugin extends Plugin {
         Set<String> registered = PushNotifications.getDeviceInterests();
         ret.put("interests", registered);
         ret.put("success", true);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
     public void clearDeviceInterests(PluginCall call) {
         PushNotifications.clearDeviceInterests();
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod
@@ -114,7 +132,7 @@ public class PusherBeamsPlugin extends Plugin {
                 ret.put("message", "Successfully authenticated with Pusher Beams");
                 ret.put("success", true);
                 ret.put("raw", values);
-                call.success(ret);
+                call.resolve(ret);
             }
 
             @Override
@@ -148,7 +166,7 @@ public class PusherBeamsPlugin extends Plugin {
         PushNotifications.clearAllState();
         JSObject ret = new JSObject();
         ret.put("success", false);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
@@ -156,13 +174,13 @@ public class PusherBeamsPlugin extends Plugin {
         PushNotifications.stop();
         JSObject ret = new JSObject();
         ret.put("success", false);
-        call.success(ret);
+        call.resolve(ret);
     }
 
     @PluginMethod
     private void setPackageName(PluginCall call) {
         this.packageName = call.getString("packageName");
-        call.success();
+        call.resolve();
     }
 
     private String getPackageName() {
@@ -171,5 +189,25 @@ public class PusherBeamsPlugin extends Plugin {
         }
 
         return "com.practera.appv2";
+    }
+
+    @Override
+    protected void handleOnNewIntent(Intent data) {
+        super.handleOnNewIntent(data);
+        Bundle bundle = data.getExtras();
+        if (bundle != null && bundle.containsKey("pusher_notification")) {
+            JSObject notificationJson = new JSObject();
+            JSObject dataObject = new JSObject();
+            for (String key : bundle.keySet()) {
+                Object value = bundle.get(key);
+                String valueStr = (value != null) ? value.toString() : null;
+                dataObject.put(key, valueStr);
+            }
+            notificationJson.put("data", dataObject);
+            JSObject actionJson = new JSObject();
+            actionJson.put("actionId", "tap");
+            actionJson.put("notification", notificationJson);
+            notifyListeners("pusherNotificationActionPerformed", actionJson, true);
+        }
     }
 }

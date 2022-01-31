@@ -16,6 +16,14 @@ class PusherBeamsWeb extends core.WebPlugin {
         });
         this.nativeOnly = "Method not implemented for web browser.";
     }
+    async start(options) {
+        console.log(this.nativeOnly, options);
+        return { success: true };
+    }
+    async getDeviceId(options) {
+        console.log(this.nativeOnly, options);
+        return { deviceId: 'deviceId' };
+    }
     async addDeviceInterest(options) {
         console.log(options);
         throw new Error(this.nativeOnly);

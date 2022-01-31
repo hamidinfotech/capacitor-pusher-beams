@@ -12,6 +12,30 @@ public class PusherBeams: CAPPlugin {
     let beamUrl = "test.com"
     let beamsClient = PushNotifications.shared
     
+    @objc public func deviceId(instanceId: String) -> String? {
+        let userDefaults = UserDefaults(suiteName: "PushNotifications." + instanceId)
+        return userDefaults?.string(forKey: "com.pusher.sdk.deviceId")
+    }
+    
+    @objc func start(_ call: CAPPluginCall) {
+        call.success()
+    }
+    
+    @objc func getDeviceId(_ call: CAPPluginCall) {
+        let instanceId = call.getString("instanceId") ?? ""
+
+        let deviceId = self.deviceId(instanceId: instanceId)
+            
+        guard let deviceId = deviceId else {
+            call.reject("There is no device ID!")
+            return
+        }
+        
+        call.success([
+            "deviceId": deviceId
+        ])
+    }
+    
     @objc func addDeviceInterest(_ call: CAPPluginCall) {
         let interest = call.getString("interest") ?? ""
         
