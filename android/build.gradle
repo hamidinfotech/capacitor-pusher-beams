@@ -56,5 +56,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
 
-    implementation 'com.pusher:push-notifications-android:1.8.0'
+    implementation 'com.pusher:push-notifications-android:1.9.0'
 }
