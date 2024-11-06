@@ -26,6 +26,7 @@ import com.pusher.pushnotifications.internal.InstanceDeviceStateStore;
 import org.json.JSONException;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -77,16 +78,8 @@ public class PusherBeamsPlugin extends Plugin {
 
     @PluginMethod
     public void setDeviceInterests(PluginCall call) throws JSONException {
-        JSArray interests = call.getArray("interests");
-
-        for (Object interest: interests.toList()) {
-            if (interest != null) {
-                PushNotifications.addDeviceInterest(interest.toString());
-            } else {
-                Log.i("set-interest::", "wrong format");
-                call.reject("Wrong format provided, should follow String[]");
-            }
-        }
+        Set<String> interests = new HashSet<>(call.getArray("interests").toList());
+        PushNotifications.setDeviceInterests(interests);
 
         JSObject ret = new JSObject();
         Set<String> registered = PushNotifications.getDeviceInterests();
