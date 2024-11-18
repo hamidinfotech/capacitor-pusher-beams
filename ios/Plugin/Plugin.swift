@@ -18,7 +18,10 @@ public class PusherBeams: CAPPlugin {
     }
     
     @objc func start(_ call: CAPPluginCall) {
-        call.success()
+        let instanceId = call.getString("instanceId") ?? ""
+
+        self.beamsClient.start(instanceId: instanceId)
+        call.resolve()
     }
     
     @objc func getDeviceId(_ call: CAPPluginCall) {
@@ -31,7 +34,7 @@ public class PusherBeams: CAPPlugin {
             return
         }
         
-        call.success([
+        call.resolve([
             "deviceId": deviceId
         ])
     }
@@ -40,7 +43,7 @@ public class PusherBeams: CAPPlugin {
         let interest = call.getString("interest") ?? ""
         
         try? self.beamsClient.addDeviceInterest(interest: interest)
-        call.success([
+        call.resolve([
             "interest": interest
         ])
     }
@@ -48,25 +51,24 @@ public class PusherBeams: CAPPlugin {
     @objc func removeDeviceInterest(_ call: CAPPluginCall) {
         let interest = call.getString("interest") ?? ""
         try? self.beamsClient.removeDeviceInterest(interest: interest)
-        call.success()
+        call.resolve()
     }
     
     @objc func getDeviceInterests(_ call: CAPPluginCall) {
         let interests: [String] = self.beamsClient.getDeviceInterests() ?? []
-        call.success([
+        call.resolve([
             "interests": interests
         ])
     }
     
     @objc func setDeviceInterests(_ call: CAPPluginCall) {
-        print(call.options["interests"])
         guard let interests = call.options["interests"] as? [String] else {
             call.reject("Interests must be provided in array type")
             return
         }
         
         try? self.beamsClient.setDeviceInterests(interests: interests)
-        call.success([
+        call.resolve([
             "interests": interests,
             "success": true
         ])
@@ -75,7 +77,7 @@ public class PusherBeams: CAPPlugin {
     @objc func clearDeviceInterests(_ call: CAPPluginCall) {
         try? self.beamsClient.clearDeviceInterests()
         print("Cleared device interests!")
-        call.success()
+        call.resolve()
     }
     
     func correctAges(headers:[String:Any])->[String:String] {
@@ -105,7 +107,7 @@ public class PusherBeams: CAPPlugin {
             }
 
             print("Successfully authenticated with Pusher Beams")
-            call.success([
+            call.resolve([
                 "associatedUser": userId
             ])
         })
@@ -115,13 +117,13 @@ public class PusherBeams: CAPPlugin {
         self.beamsClient.clearAllState {
             print("state cleared")
         }
-        call.success()
+        call.resolve()
     }
 
     @objc func stop(_ call: CAPPluginCall) {
         self.beamsClient.stop{
             print("Stopped!")
         }
-        call.success()
+        call.resolve()
     }
 }

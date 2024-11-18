@@ -19,7 +19,7 @@ export interface PusherBeamsPlugin {
   addListener(
       eventName: 'pusherNotificationActionPerformed',
       listenerFunc: (notification: ActionPerformed) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 }
 
 export interface ActionPerformed {
